@@ -40,7 +40,7 @@ int killing(sfVector2i mouse, ducker *duck, ducker *duck2, ducker *duck3, sfSoun
         mouse.y >= duckpos.y) {
         pink_duck_init(duck, height, width);
         //sfSound_play(shot);
-        *hit --;
+        (*hit)--;
         return (100);
     }
 
@@ -48,7 +48,7 @@ int killing(sfVector2i mouse, ducker *duck, ducker *duck2, ducker *duck3, sfSoun
              mouse.y <= duckpos2.y + 110 && mouse.y >= duckpos2.y) {
         green_duck_init(duck2, height, width);
         //sfSound_play(shot);
-        *hit --;
+        (*hit)--;
         return (150);
     }
 
@@ -56,12 +56,12 @@ int killing(sfVector2i mouse, ducker *duck, ducker *duck2, ducker *duck3, sfSoun
              mouse.y <= duckpos3.y + 110 && mouse.y >= duckpos3.y) {
         RL_duck_init(duck3, height, width);
         //sfSound_play(shot);
-        *hit --;
+        (*hit)--;
         return (200);
     }
 
     else {
-        *hit --;
+        (*hit)--;
         //sfSound_play(shot);
         return (0);
     }

@@ -53,16 +53,15 @@ void display_bullet(sfRenderWindow *window, int bullet, int width, int height)
 {
     
     switch (bullet) {
-    case 10: disp(window, 1, 1);
-    case 9: disp(window, 30, 1);
-    case 8: disp(window, 60, 1);
-    case 7: disp(window, 90, 1);
-    case 6: disp(window, 120, 1);
-    case 5: disp(window, 150, 1);
-    case 4: disp(window, 180, 1);
-    case 3: disp(window, 210, 1);
-    case 2: disp(window, 240, 1);
-    case 1: disp(window, 270, 1);
-    case 0: disp(window, 300, 1);
+    case 10: disp(window, 270, 1);
+    case 9: disp(window, 240, 1);
+    case 8: disp(window, 210, 1);
+    case 7: disp(window, 180, 1);
+    case 6: disp(window, 150, 1);
+    case 5: disp(window, 120, 1);
+    case 4: disp(window, 90, 1);
+    case 3: disp(window, 60, 1);
+    case 2: disp(window, 30, 1);
+    case 1: disp(window, 0, 1);
     }
 }

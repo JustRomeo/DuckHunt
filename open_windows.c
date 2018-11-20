@@ -68,76 +68,55 @@ int window_properties(unsigned int width, unsigned int height)
     sfVector2f cursor_var;
     sfVector2f cursor_size;
     int scores = 0;
-    int *hit = 10;
+    int hit = 10;
+    int amo = 2;
     sfSoundBuffer *soundbuffer_shot = sfSoundBuffer_createFromFile("sound_shot.wav");
     sfSound *shot;
-
     dogger dog;
     ducker pink_duck;
     ducker green_duck;
     ducker RL_duck;
 
-    //printf("\ninit des struct : ...");
     dog_init(&dog, height);
     pink_duck_init(&pink_duck, height, width);
     green_duck_init(&green_duck, height, width);
     RL_duck_init(&RL_duck, height, width);
-        
-    //printf("OK\nsound :           ...");
     shot = sfSound_create();
     sfSound_setBuffer(shot, soundbuffer_shot);
-
-    //printf("OK\nothers pos :      ...");
     init_pos(width, height, dog, &size_back, &cursor_var, &cursor_size);
-
-    //printf("OK\nsprites :         ...");
     sfSprite_setScale(s_back, size_back);
     sfSprite_setScale(s_cursor, cursor_size);
-
-    //printf("OK\nwhile :           ...\n");
     while (sfRenderWindow_isOpen(window)) {
-        //printf("\nmouse :           ...");
         mouse = sfMouse_getPositionRenderWindow(window);
         cursor_var.x = (float)mouse.x - 50;
         cursor_var.y = (float)mouse.y - 55;
-        //printf("OK\nclock :           ...");
         time = sfClock_getElapsedTime(clock);
         moving = sfClock_getElapsedTime(clock2);
         seconds = time.microseconds / 1000000.0;
-
         sfRenderWindow_clear(window, sfWhite);
-        //printf("OK\nsetTexture :      ...");
         sfSprite_setTexture(s_back, background, sfTrue);
         sfSprite_setTexture(pink_duck.sprite, pink_duck.texture, sfTrue);
         sfSprite_setTexture(green_duck.sprite, green_duck.texture, sfTrue);
         sfSprite_setTexture(RL_duck.sprite, RL_duck.texture, sfTrue);
         sfSprite_setTexture(dog.sprite, dog.texture, sfTrue);
         sfSprite_setTexture(s_cursor, cursor, sfTrue);
-            
         sfRenderWindow_drawSprite(window, s_back, NULL);
-        //printf("OK\ntextureRec :      ...");
         sfSprite_setTextureRect(pink_duck.sprite, pink_duck.rect);
         sfSprite_setTextureRect(green_duck.sprite, green_duck.rect);
         sfSprite_setTextureRect(RL_duck.sprite, RL_duck.rect);
         sfSprite_setTextureRect(dog.sprite, dog.rect);
-        //printf("OK\ndrawSprite :      ...");
         sfRenderWindow_drawSprite(window, pink_duck.sprite, NULL);
         sfRenderWindow_drawSprite(window, green_duck.sprite, NULL);
         sfRenderWindow_drawSprite(window, RL_duck.sprite, NULL);
         sfRenderWindow_drawSprite(window, dog.sprite, NULL);
         sfRenderWindow_drawSprite(window, s_cursor, NULL);
-    
-        //printf("OK\ncursorPosition :  ...");
         sfSprite_setPosition(s_cursor, cursor_var);
-        //printf("OK\ntempo :           ...");
         sfRenderWindow_setMouseCursorVisible(window, sfFalse);
-
         if (seconds > 0.15) {
             tempo_sprite(&pink_duck.rect, &green_duck.rect, &RL_duck.rect, &dog.rect,
                          &seconds);
             sfClock_restart(clock);
         }
-        //printf("OK\nanimation :       ...");
         if (moving.microseconds > 10000) {
             move(&pink_duck);
             move(&green_duck);
@@ -146,23 +125,20 @@ int window_properties(unsigned int width, unsigned int height)
             sfClock_restart(clock2);
             init_clean(height, width, &pink_duck, &green_duck, &RL_duck);
         }
-
         display_bullet(window, hit, width, height);
-        
-        //printf("OK\nEvent :           ...");
-        while (sfRenderWindow_pollEvent(window, &event)) {
+        while (sfRenderWindow_pollEvent(window, &event) && hit > 0) {
             scores += input_event(event, window, mouse, &pink_duck, &green_duck, &RL_duck,
-                                  shot, height, width, hit);
+                                  shot, height, width, &hit);
         }
-        //printf("OK\n");
+        if (hit == 0 && amo > 1) {
+            hit = 10;
+            amo --;
+        }
         sfRenderWindow_display(window);
-        if (hit == 0)
+        if (hit == 0 && amo == 1)
             break;
     }
-    //printf("\nclose :           ...");
     close_window(window, shot, soundbuffer_shot);
-    //printf("OK\n");
-    printf("\nScores      : %d\n", scores);
-    printf("hit restant : %d\n", hit);
+    printf("\nScore : %d\n", scores);
     return (0);
 }
