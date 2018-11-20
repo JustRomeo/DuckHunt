@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** mid_duck.c
+** pink_mid_duck.c
 ** File description:
 ** HEADER
 */
@@ -18,7 +18,6 @@
 
 #include "include/proto.h"
 #include "include/my.h"
-#include "include/framebuffer.h"
 
 sfIntRect rect_MD(sfIntRect *rectangle)
 {
@@ -36,11 +35,31 @@ void move_image_MD(sfIntRect *rectangle)
         rectangle->left = 0;
 }
 
-void move_MD(sfSprite *sprite)
+void move(ducker *duck)
 {
-    sfVector2f vector;
+    sfSprite_move(duck->sprite, duck->speed);
+}
 
-    vector.x = 2;
-    vector.y = 0;
-    sfSprite_move(sprite, vector);
+void move_image_mid(ducker *duck, sfIntRect *rectangle)
+{
+    if (duck->rect.left < 250) {
+        if (rectangle->left < 249)
+            rectangle->left += 83;
+        else
+            rectangle->left = 0;
+    }
+
+    else if (duck->rect.left < 500) {
+        if (rectangle->left < 498)
+            rectangle->left += 83;
+        else
+            rectangle->left = 250;
+    }
+
+    else {
+        if (rectangle->left < 697)
+            rectangle->left += 83;
+        else
+            rectangle->left = 750;
+    }
 }

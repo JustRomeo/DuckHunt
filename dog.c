@@ -18,11 +18,11 @@
 
 #include "include/proto.h"
 #include "include/my.h"
-#include "include/framebuffer.h"
+#include "include/struct.h"
 
 void move_dog(sfIntRect *dogrect)
 {
-    if (dogrect->left < 550)//700)
+    if (dogrect->left < 550)
         dogrect->left += 180;
     else
         dogrect->left = 12;

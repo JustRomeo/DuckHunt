@@ -8,17 +8,27 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stddef.h>
 
 #include <SFML/Audio.h>
+#include <SFML/Audio/SoundBuffer.h>
+#include <SFML/Audio/Sound.h>
+#include <SFML/Audio/SoundStatus.h>
+#include <SFML/Audio/Export.h>
+#include <SFML/Audio/Types.h>
+
 #include <SFML/Graphics.h>
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Sprite.h>
+
 #include <SFML/System.h>
+#include <SFML/System/Vector3.h>
+#include <SFML/System/Time.h>
+#include <SFML/System/InputStream.h>
 
 #include "include/proto.h"
 #include "include/my.h"
-#include "include/framebuffer.h"
 
 sfRenderWindow *createMyWindow(unsigned int width, unsigned int height)
 {
@@ -32,110 +42,127 @@ sfRenderWindow *createMyWindow(unsigned int width, unsigned int height)
     return (window);
 }
 
-void close_window(sfRenderWindow *window)
+void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuffer_shot)
 {
-
+    sfSound_destroy(shot);
+    sfSoundBuffer_destroy(soundbuffer_shot);
+    sfRenderWindow_close(window);
 }
 
 int window_properties(unsigned int width, unsigned int height)
 {
     sfRenderWindow *window = createMyWindow(width, height);
     sfVideoMode *video_mode;
-    sfTexture *duck_med = sfTexture_createFromFile("sprite_duck_medium.png", NULL);
-    sfTexture *duck_RL = sfTexture_createFromFile("sprite_dog.png", NULL);
     sfTexture *background = sfTexture_createFromFile("sprite_back.png", NULL);
-    sfTexture *cursor = sfTexture_createFromFile("sprite_cursor.jpg", NULL);
-    sfTexture *dog = sfTexture_createFromFile("sprite_dog.png", NULL);
-    sfSprite *s_duck_med = sfSprite_create();
-    sfSprite *s_duck_RL = sfSprite_create();
-    sfSprite *s_dog = sfSprite_create();
+    sfTexture *cursor = sfTexture_createFromFile("sprite_cursor.png", NULL);
     sfSprite *s_back = sfSprite_create();
     sfSprite *s_cursor = sfSprite_create();
     sfMouseButtonEvent event;
     sfVector2i mouse;
-    sfIntRect rectangle;
-    sfIntRect rectangle_RL;
-    sfIntRect rectangle_LR;
-    sfIntRect dogrect;
     sfClock *clock = sfClock_create();
     sfClock *clock2 = sfClock_create();
     sfTime time;
     sfTime moving;
     float seconds = 0;
-    sfVector2f init_dog;
-    sfVector2f init_duck_RL;
     sfVector2f size_back;
     sfVector2f cursor_var;
     sfVector2f cursor_size;
+    int scores = 0;
+    int *hit = 10;
+    sfSoundBuffer *soundbuffer_shot = sfSoundBuffer_createFromFile("sound_shot.wav");
+    sfSound *shot;
 
-    init_dog.x = 10;
-    init_dog.y = height - 220;
-    size_back.x = 4;
-    size_back.y = 4;
-    cursor_size.x = 0.4;
-    cursor_size.y = 0.4;
-    init_duck_RL.x = width - 100;
-    init_duck_RL.y = height - 100;
+    dogger dog;
+    ducker pink_duck;
+    ducker green_duck;
+    ducker RL_duck;
 
-    rect_MD(&rectangle);
-    rect_RL(&rectangle_RL);
-    rect_dog(&dogrect);
-    sfSprite_setPosition(s_dog, init_dog);
-    sfSprite_setPosition(s_duck_RL, init_duck_RL);
+    //printf("\ninit des struct : ...");
+    dog_init(&dog, height);
+    pink_duck_init(&pink_duck, height, width);
+    green_duck_init(&green_duck, height, width);
+    RL_duck_init(&RL_duck, height, width);
+        
+    //printf("OK\nsound :           ...");
+    shot = sfSound_create();
+    sfSound_setBuffer(shot, soundbuffer_shot);
+
+    //printf("OK\nothers pos :      ...");
+    init_pos(width, height, dog, &size_back, &cursor_var, &cursor_size);
+
+    //printf("OK\nsprites :         ...");
     sfSprite_setScale(s_back, size_back);
     sfSprite_setScale(s_cursor, cursor_size);
-    
+
+    //printf("OK\nwhile :           ...\n");
     while (sfRenderWindow_isOpen(window)) {
+        //printf("\nmouse :           ...");
         mouse = sfMouse_getPositionRenderWindow(window);
         cursor_var.x = (float)mouse.x - 50;
         cursor_var.y = (float)mouse.y - 55;
-    
+        //printf("OK\nclock :           ...");
         time = sfClock_getElapsedTime(clock);
         moving = sfClock_getElapsedTime(clock2);
         seconds = time.microseconds / 1000000.0;
 
         sfRenderWindow_clear(window, sfWhite);
-        
+        //printf("OK\nsetTexture :      ...");
         sfSprite_setTexture(s_back, background, sfTrue);
-        sfSprite_setTexture(s_duck_med, duck_med, sfTrue);
-        sfSprite_setTexture(s_duck_RL, duck_RL, sfTrue);
-        sfSprite_setTexture(s_dog, dog, sfTrue);
+        sfSprite_setTexture(pink_duck.sprite, pink_duck.texture, sfTrue);
+        sfSprite_setTexture(green_duck.sprite, green_duck.texture, sfTrue);
+        sfSprite_setTexture(RL_duck.sprite, RL_duck.texture, sfTrue);
+        sfSprite_setTexture(dog.sprite, dog.texture, sfTrue);
         sfSprite_setTexture(s_cursor, cursor, sfTrue);
-        
+            
         sfRenderWindow_drawSprite(window, s_back, NULL);
-
-        sfSprite_setTextureRect(s_duck_med, rectangle);
-        sfSprite_setTextureRect(s_duck_RL, rectangle_RL);
-        sfSprite_setTextureRect(s_dog, dogrect);
-        
-        sfRenderWindow_drawSprite(window, s_duck_med, NULL);
-        sfRenderWindow_drawSprite(window, s_duck_RL, NULL);
-        sfRenderWindow_drawSprite(window, s_dog, NULL);
+        //printf("OK\ntextureRec :      ...");
+        sfSprite_setTextureRect(pink_duck.sprite, pink_duck.rect);
+        sfSprite_setTextureRect(green_duck.sprite, green_duck.rect);
+        sfSprite_setTextureRect(RL_duck.sprite, RL_duck.rect);
+        sfSprite_setTextureRect(dog.sprite, dog.rect);
+        //printf("OK\ndrawSprite :      ...");
+        sfRenderWindow_drawSprite(window, pink_duck.sprite, NULL);
+        sfRenderWindow_drawSprite(window, green_duck.sprite, NULL);
+        sfRenderWindow_drawSprite(window, RL_duck.sprite, NULL);
+        sfRenderWindow_drawSprite(window, dog.sprite, NULL);
         sfRenderWindow_drawSprite(window, s_cursor, NULL);
-                 
+    
+        //printf("OK\ncursorPosition :  ...");
         sfSprite_setPosition(s_cursor, cursor_var);
-                
+        //printf("OK\ntempo :           ...");
         sfRenderWindow_setMouseCursorVisible(window, sfFalse);
 
         if (seconds > 0.15) {
-            move_image_MD(&rectangle);
-            move_image_RL(&rectangle_RL);
-            move_dog(&dogrect);
+            tempo_sprite(&pink_duck.rect, &green_duck.rect, &RL_duck.rect, &dog.rect,
+                         &seconds);
             sfClock_restart(clock);
         }
-
+        //printf("OK\nanimation :       ...");
         if (moving.microseconds > 10000) {
-            move_MD(s_duck_med);
-            move_RL(s_duck_RL);
-            movement_dog(s_dog);
+            move(&pink_duck);
+            move(&green_duck);
+            move(&RL_duck);
+            movement_dog(dog.sprite);
             sfClock_restart(clock2);
+            init_clean(height, width, &pink_duck, &green_duck, &RL_duck);
         }
 
-        while (sfRenderWindow_pollEvent(window, &event))
-            input_event(event, window, mouse, s_duck_med, s_duck_RL, s_duck_RL);
+        display_bullet(window, hit, width, height);
         
+        //printf("OK\nEvent :           ...");
+        while (sfRenderWindow_pollEvent(window, &event)) {
+            scores += input_event(event, window, mouse, &pink_duck, &green_duck, &RL_duck,
+                                  shot, height, width, hit);
+        }
+        //printf("OK\n");
         sfRenderWindow_display(window);
+        if (hit == 0)
+            break;
     }
-    sfRenderWindow_close(window);
+    //printf("\nclose :           ...");
+    close_window(window, shot, soundbuffer_shot);
+    //printf("OK\n");
+    printf("\nScores      : %d\n", scores);
+    printf("hit restant : %d\n", hit);
     return (0);
 }

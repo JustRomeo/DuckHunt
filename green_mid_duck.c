@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** RL_duck.c
+** green_mid_duck.c
 ** File description:
 ** HEADER
 */
@@ -18,24 +18,24 @@
 
 #include "include/proto.h"
 #include "include/my.h"
-#include "include/struct.h"
 
-sfIntRect rect_RL(sfIntRect *rectangle_RL)
+sfIntRect Grect_MD(sfIntRect *Grectangle)
 {
-    rectangle_RL->top = 170;
-    rectangle_RL->left = 100;
-    rectangle_RL->width = 100;
-    rectangle_RL->height = 120;
+    Grectangle->top = 170;
+    Grectangle->left = 650;
+    Grectangle->width = 150;
+    Grectangle->height = 120;
 }
 
-void move_image_RL(sfIntRect *rectangle_RL)
+void Gmove_image_MD(sfIntRect *Grectangle)
 {
-    if (rectangle_RL->left < 400)
-        rectangle_RL->left += 330;
+    if (Grectangle->left < 700)
+        Grectangle->left += 150;
     else
-        rectangle_RL->left = 100;
+        Grectangle->left = 650;
 }
-void move_RL(ducker *duck)
+
+void Gmove_MD(ducker *duck)
 {
     sfSprite_move(duck->sprite, duck->speed);
 }

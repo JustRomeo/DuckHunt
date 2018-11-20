@@ -17,7 +17,6 @@
 
 #include "include/proto.h"
 #include "include/my.h"
-#include "include/framebuffer.h"
 
 int main (void)
 {
