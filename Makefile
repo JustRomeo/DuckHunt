@@ -30,8 +30,8 @@ CSFML = -l csfml-graphics -l csfml-audio -l csfml-system
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-##			make -C ./lib/my
-			gcc -o $(NAME) $(OBJ) $(INC) $(CSFML)
+			make -C lib/my
+			gcc -o $(NAME) $(OBJ) $(INC) $(LIB) $(CSFML)
 			rm -f $(OBJ)
 			clear
 
@@ -49,3 +49,5 @@ fclean:	clean
 
 re: fclean all
 
+usage:	$(NAME)
+		./$(NAME) -h

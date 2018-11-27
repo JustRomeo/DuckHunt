@@ -5,21 +5,18 @@
 ** header
 */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-
-#include <SFML/Audio.h>
-#include <SFML/Graphics.h>
-#include <SFML/Graphics/RenderWindow.h>
-#include <SFML/Graphics/Texture.h>
-#include <SFML/Graphics/Sprite.h>
-
 #include "include/proto.h"
 #include "include/my.h"
 
-int main (void)
+int main (int ac, char **argv)
 {
-    window_properties(1920, 1080);
+    if (ac > 1 && ac < 3 && argv[1][0] == '-') {
+        if (argv[1][1] == 'h')
+            usage();
+    }
+    if (ac == 1)
+        window_properties(1920, 1080);
+    else
+        write(1, "Unknow arguments :(\n", 20);
     return(0);
 }

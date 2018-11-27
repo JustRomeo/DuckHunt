@@ -9,18 +9,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stddef.h>
-
+#include <SFML/Audio.h>
 #include <SFML/Graphics.h>
-#include <SFML/Graphics/RenderWindow.h>
-#include <SFML/Graphics/Texture.h>
-#include <SFML/Graphics/Sprite.h>
 #include <SFML/System.h>
-#include <SFML/System/Vector3.h>
-#include <SFML/System/Time.h>
-#include <SFML/System/InputStream.h>
-
+#include "include/proto.h"
 #include "include/my.h"
-#include "include/struct.h"
 
 int tempo_sprite(sfIntRect *rectangle, sfIntRect *Grectangle,
                  sfIntRect *rectangle_RL, sfIntRect *dogrect, float *seconds)

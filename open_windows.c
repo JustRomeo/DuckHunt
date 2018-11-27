@@ -9,24 +9,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stddef.h>
-
 #include <SFML/Audio.h>
-#include <SFML/Audio/SoundBuffer.h>
-#include <SFML/Audio/Sound.h>
-#include <SFML/Audio/SoundStatus.h>
-#include <SFML/Audio/Export.h>
-#include <SFML/Audio/Types.h>
-
 #include <SFML/Graphics.h>
-#include <SFML/Graphics/RenderWindow.h>
-#include <SFML/Graphics/Texture.h>
-#include <SFML/Graphics/Sprite.h>
-
 #include <SFML/System.h>
-#include <SFML/System/Vector3.h>
-#include <SFML/System/Time.h>
-#include <SFML/System/InputStream.h>
-
 #include "include/proto.h"
 #include "include/my.h"
 
@@ -71,7 +56,7 @@ int window_properties(unsigned int width, unsigned int height)
     int hit = 10;
     int amo = 2;
     sfSoundBuffer *soundbuffer_shot = sfSoundBuffer_createFromFile("sound_shot.wav");
-    sfSound *shot;
+    sfSound *shot = sfSound_create();
     dogger dog;
     ducker pink_duck;
     ducker green_duck;
@@ -81,7 +66,6 @@ int window_properties(unsigned int width, unsigned int height)
     pink_duck_init(&pink_duck, height, width);
     green_duck_init(&green_duck, height, width);
     RL_duck_init(&RL_duck, height, width);
-    shot = sfSound_create();
     sfSound_setBuffer(shot, soundbuffer_shot);
     init_pos(width, height, dog, &size_back, &cursor_var, &cursor_size);
     sfSprite_setScale(s_back, size_back);
@@ -139,6 +123,6 @@ int window_properties(unsigned int width, unsigned int height)
             break;
     }
     close_window(window, shot, soundbuffer_shot);
-    printf("\nScore : %d\n", scores);
+    my_printf("Score : %d\n", scores);
     return (0);
 }

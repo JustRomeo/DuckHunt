@@ -8,18 +8,12 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include <stddef.h>
 #include <SFML/Audio.h>
 #include <SFML/Graphics.h>
-#include <SFML/Graphics/RenderWindow.h>
-#include <SFML/Graphics/Texture.h>
-#include <SFML/Graphics/Sprite.h>
 #include <SFML/System.h>
-#include <SFML/System/Time.h>
-
 #include "include/proto.h"
 #include "include/my.h"
-#include "include/struct.h"
 
 void init_pos(unsigned int width, unsigned int height, dogger dog, sfVector2f *size_back,
               sfVector2f *cursor_var, sfVector2f *cursor_size)
