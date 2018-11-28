@@ -9,21 +9,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stddef.h>
-
 #include <SFML/Audio.h>
-#include <SFML/Audio/SoundBuffer.h>
-#include <SFML/Audio/Sound.h>
-#include <SFML/Audio/SoundStatus.h>
-#include <SFML/Audio/Export.h>
-#include <SFML/Audio/Types.h>
 #include <SFML/Graphics.h>
-#include <SFML/Graphics/RenderWindow.h>
-#include <SFML/Graphics/Texture.h>
-#include <SFML/Graphics/Sprite.h>
 #include <SFML/System.h>
-#include <SFML/System/Vector3.h>
-#include <SFML/System/Time.h>
-#include <SFML/System/InputStream.h>
 
 typedef struct chien
 {
@@ -32,6 +20,7 @@ typedef struct chien
     sfIntRect rect;
 
     sfVector2f init;
+    sfVector2f speed;
 } dogger;
 
 typedef struct canard
@@ -59,7 +48,7 @@ void move_image_RL(sfIntRect *rectangle);
 
 void move_dog(sfIntRect *dogrect);
 sfIntRect rect_dog(sfIntRect *dogrect);
-void movement_dog(sfSprite *sprite);
+void movement_dog(dogger *dog);
 
 sfRenderWindow *createMyWindow(unsigned int width, unsigned int height);
 void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuffer_shot);
@@ -76,7 +65,8 @@ void pink_duck_init(ducker *duck, int height, int width);
 void dog_init(dogger *dog, int height);
 void move_image_mid(ducker *duck, sfIntRect *rectangle);
 
-void init_clean(int height, int width, ducker *duck, ducker *duck2, ducker *duck3);
+void init_clean(int height, int width, ducker *duck, ducker *duck2, ducker *duck3,
+                dogger *dog);
 
 void init_pos(unsigned int width, unsigned int height, dogger dog,
               sfVector2f *size_back, sfVector2f *cursor_var, sfVector2f *cursor_size);

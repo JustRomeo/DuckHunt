@@ -106,9 +106,9 @@ int window_properties(unsigned int width, unsigned int height)
             move(&pink_duck);
             move(&green_duck);
             move(&RL_duck);
-            movement_dog(dog.sprite);
+            movement_dog(&dog);
             sfClock_restart(clock2);
-            init_clean(height, width, &pink_duck, &green_duck, &RL_duck);
+            init_clean(height, width, &pink_duck, &green_duck, &RL_duck, &dog);
         }
         display_bullet(window, hit, width, height);
         while (sfRenderWindow_pollEvent(window, &event) && hit > 0) {

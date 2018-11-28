@@ -26,15 +26,17 @@ void init_pos(unsigned int width, unsigned int height, dogger dog, sfVector2f *s
 
 void dog_init(dogger *dog, int height)
 {
+    srand (time (NULL));
     dog->texture = sfTexture_createFromFile("sprite_dog.png", NULL);
     dog->sprite = sfSprite_create();
     dog->rect.top = 0;
     dog->rect.left = 12;
     dog->rect.width = 180;
     dog->rect.height = 168;
-    dog->init.x = 10;
+    dog->init.x = -1 * rand() %(100);
     dog->init.y = height - 220;
-
+    dog->speed.x = 2 + rand() %(3);
+    dog->speed.y = 0;
     sfSprite_setPosition(dog->sprite, dog->init);
 }
 
@@ -51,7 +53,6 @@ void pink_duck_init(ducker *duck, int height, int width)
     duck->init.y = rand() %(height - 300);
     duck->speed.x = 5 + rand() %(5);
     duck->speed.y = 0;
-
     sfSprite_setPosition(duck->sprite, duck->init);
 }
 
@@ -68,7 +69,6 @@ void green_duck_init(ducker *duck, int height, int width)
     duck->init.y = rand() %(height - 300);
     duck->speed.x = 5 + rand() %(5);
     duck->speed.y = 0;
-
     sfSprite_setPosition(duck->sprite, duck->init);
 }
 

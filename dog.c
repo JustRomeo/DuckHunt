@@ -31,11 +31,7 @@ sfIntRect rect_dog(sfIntRect *dogrect)
     dogrect->height = 168;
 }
 
-void movement_dog(sfSprite *sprite)
+void movement_dog(dogger *dog)
 {
-    sfVector2f vector;
-
-    vector.x = 1;
-    vector.y = 0;
-    sfSprite_move(sprite, vector);
+    sfSprite_move(dog->sprite, dog->speed);
 }
