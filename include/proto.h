@@ -47,8 +47,8 @@ sfIntRect rect_dog(sfIntRect *dogrect);
 void movement_dog(dogger *dog);
 sfRenderWindow *createMyWindow(unsigned int width, unsigned int height);
 void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuffer_shot,
-                  int scores);
-int window_properties(unsigned int width, unsigned int height, int hit, int amo);
+                  int scores, int *Game);
+int window_properties(unsigned int width, unsigned int height, int hit, int amo, int *Game);
 void mouse_co(sfMouseButtonEvent event, sfRenderWindow *window);
 void analyse_events(sfRenderWindow *window, sfEvent event);
 void display_bullet(sfRenderWindow *window, int bullet, int width, int height);
@@ -69,3 +69,4 @@ void start_init2(int height, int width, ducker *RL, dogger *dog);
 void drawing(sfRenderWindow *window, sfSprite *pink, sfSprite *green,
              sfSprite *dog, sfSprite *RL);
 void mover(ducker *pink, ducker *green, ducker *RL, dogger *dog);
+int Mainscreen(int width, int height, int *Game);

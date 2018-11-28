@@ -28,15 +28,16 @@ sfRenderWindow *createMyWindow(unsigned int width, unsigned int height)
 }
 
 void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuffer_shot,
-                  int scores)
+                  int scores, int *Game)
 {
     sfSound_destroy(shot);
     sfSoundBuffer_destroy(soundbuffer_shot);
     sfRenderWindow_close(window);
     my_printf("Score : %d\n", scores);
+    (*Game) = 2;
 }
 
-int window_properties(unsigned int width, unsigned int height, int hit, int amo)
+int window_properties(unsigned int width, unsigned int height, int hit, int amo, int *Game)
 {
     sfRenderWindow *window = createMyWindow(width, height);
     sfTexture *background = sfTexture_createFromFile("ressources/sprite_back.png", NULL);
@@ -115,6 +116,6 @@ int window_properties(unsigned int width, unsigned int height, int hit, int amo)
         if (hit == 0 && amo == 1)
             break;
     }
-    close_window(window, shot, soundbuffer_shot, scores);
+    close_window(window, shot, soundbuffer_shot, scores, Game);
     return (0);
 }

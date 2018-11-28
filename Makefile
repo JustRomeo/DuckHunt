@@ -18,6 +18,7 @@ SRC =	main.c	\
 		clean.c	\
 		bullet.c	\
 		IGstats.c	\
+		Screen.c	\
 
 OBJ =	$(SRC:.c=.o)
 
