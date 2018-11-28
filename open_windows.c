@@ -70,6 +70,7 @@ int window_properties(unsigned int width, unsigned int height)
     init_pos(width, height, dog, &size_back, &cursor_var, &cursor_size);
     sfSprite_setScale(s_back, size_back);
     sfSprite_setScale(s_cursor, cursor_size);
+    sfRenderWindow_setFramerateLimit(window, 60);
     while (sfRenderWindow_isOpen(window)) {
         mouse = sfMouse_getPositionRenderWindow(window);
         cursor_var.x = (float)mouse.x - 50;

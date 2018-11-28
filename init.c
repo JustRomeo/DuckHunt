@@ -49,7 +49,7 @@ void pink_duck_init(ducker *duck, int height, int width)
     duck->rect.height = 110;
     duck->init.x = -150;
     duck->init.y = rand() %(height - 300);
-    duck->speed.x = 1 + rand() %(5);
+    duck->speed.x = 5 + rand() %(5);
     duck->speed.y = 0;
 
     sfSprite_setPosition(duck->sprite, duck->init);
@@ -66,7 +66,7 @@ void green_duck_init(ducker *duck, int height, int width)
     duck->rect.height = 120;
     duck->init.x = -10;
     duck->init.y = rand() %(height - 300);
-    duck->speed.x = 1 + rand() %(3);
+    duck->speed.x = 5 + rand() %(5);
     duck->speed.y = 0;
 
     sfSprite_setPosition(duck->sprite, duck->init);
@@ -83,7 +83,7 @@ void RL_duck_init(ducker *duck, int height, int width)
     duck->rect.height = 120;
     duck->init.x = (width / 2) + rand() % (width / 2);
     duck->init.y = height;
-    duck->speed.x = -4 + rand() %(3);
-    duck->speed.y = -4 + rand() %(3);
+    duck->speed.x = -6 + rand() %(4);
+    duck->speed.y = -6 + rand() %(4);
     sfSprite_setPosition(duck->sprite, duck->init);
 }
