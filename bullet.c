@@ -32,7 +32,7 @@
 
 void disp(sfRenderWindow *window, float x, float y)
 {
-    sfTexture *tbullet = sfTexture_createFromFile("sprite_bullet.png", NULL);
+    sfTexture *tbullet = sfTexture_createFromFile("ressources/sprite_bullet.png", NULL);
     sfSprite *sbullet = sfSprite_create();
     sfVector2f where;
     sfVector2f size;

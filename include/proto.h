@@ -35,42 +35,37 @@ typedef struct canard
 
 int tempo_sprite(sfIntRect *rectangle, sfIntRect *Grectangle, sfIntRect *rectangle_RL,
                  sfIntRect *dogrect, float *seconds);
-
 sfIntRect rect_MD(sfIntRect *rectangle);
 void move_image_MD(sfIntRect *rectangle);
 void move(ducker *duck);
-
 sfIntRect Grect_MD(sfIntRect *Grectangle);
 void Gmove_image_MD(sfIntRect *Grectangle);
-
 sfIntRect rect_RL(sfIntRect *rectangle);
 void move_image_RL(sfIntRect *rectangle);
-
 void move_dog(sfIntRect *dogrect);
 sfIntRect rect_dog(sfIntRect *dogrect);
 void movement_dog(dogger *dog);
-
 sfRenderWindow *createMyWindow(unsigned int width, unsigned int height);
-void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuffer_shot);
-int window_properties(unsigned int width, unsigned int height);
-
+void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuffer_shot,
+                  int scores);
+int window_properties(unsigned int width, unsigned int height, int hit, int amo);
 void mouse_co(sfMouseButtonEvent event, sfRenderWindow *window);
 void analyse_events(sfRenderWindow *window, sfEvent event);
-
 void display_bullet(sfRenderWindow *window, int bullet, int width, int height);
-
 void green_duck_init(ducker *duck, int height, int width);
 void RL_duck_init(ducker *duck, int height, int width);
 void pink_duck_init(ducker *duck, int height, int width);
 void dog_init(dogger *dog, int height);
 void move_image_mid(ducker *duck, sfIntRect *rectangle);
-
 void init_clean(int height, int width, ducker *duck, ducker *duck2, ducker *duck3,
                 dogger *dog);
-
 void init_pos(unsigned int width, unsigned int height, dogger dog,
               sfVector2f *size_back, sfVector2f *cursor_var, sfVector2f *cursor_size);
-
 int input_event(sfMouseButtonEvent event, sfRenderWindow *window, sfVector2i mouse,
                 ducker *duck, ducker *duck2, ducker *duck3, sfSound *shot, int height,
                 int width, int *hit);
+void start_init(int height, int width, ducker *pink, ducker *green);
+void start_init2(int height, int width, ducker *RL, dogger *dog);
+void drawing(sfRenderWindow *window, sfSprite *pink, sfSprite *green,
+             sfSprite *dog, sfSprite *RL);
+void mover(ducker *pink, ducker *green, ducker *RL, dogger *dog);

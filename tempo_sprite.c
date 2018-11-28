@@ -23,3 +23,4 @@ int tempo_sprite(sfIntRect *rectangle, sfIntRect *Grectangle,
     move_image_RL(rectangle_RL);
     move_dog(dogrect);
 }
+

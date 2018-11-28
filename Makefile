@@ -8,6 +8,7 @@
 SRC =	main.c	\
 		open_windows.c	\
 		init.c	\
+		2init.c	\
 		input.c	\
 		dog.c	\
 		green_mid_duck.c	\
@@ -16,6 +17,7 @@ SRC =	main.c	\
 		tempo_sprite.c	\
 		clean.c	\
 		bullet.c	\
+		IGstats.c	\
 
 OBJ =	$(SRC:.c=.o)
 
