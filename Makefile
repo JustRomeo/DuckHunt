@@ -6,19 +6,19 @@
 ##
 
 SRC =	main.c	\
-		open_windows.c	\
-		init.c	\
-		2init.c	\
+		Looper.c	\
+		Entities.c	\
+		Init.c	\
 		input.c	\
 		dog.c	\
 		green_mid_duck.c	\
 		pink_mid_duck.c	\
 		RL_duck.c	\
-		tempo_sprite.c	\
+		animation.c	\
 		clean.c	\
 		bullet.c	\
 		IGstats.c	\
-		Screen.c	\
+		Menu.c	\
 
 OBJ =	$(SRC:.c=.o)
 

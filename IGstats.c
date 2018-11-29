@@ -34,13 +34,19 @@ void drawing(sfRenderWindow *window, ducker *pink, ducker *green,
     sfSprite_setTextureRect(dog->sprite, dog->rect);
 }
 
-void drawing2(sfRenderWindow *window, cursor *cursor, Back *back)
+void drawing2(sfRenderWindow *window, cursor *cursor, Back *back, sfVector2i *mouse)
 {
     sfSprite_setTexture(back->sprite, back->texture, sfTrue);
     sfRenderWindow_drawSprite(window, back->sprite, NULL);
+
+    (*mouse) = sfMouse_getPositionRenderWindow(window);
+    cursor->pos.x = (float)mouse->x - 50;
+    cursor->pos.y = (float)mouse->y - 55;
+        
     sfSprite_setTexture(cursor->sprite, cursor->texture, sfTrue);
     sfRenderWindow_drawSprite(window, cursor->sprite, NULL);
     sfSprite_setPosition(cursor->sprite, cursor->pos);
+    
 }
 
 void mover(ducker *pink, ducker *green, ducker *RL, dogger *dog)
@@ -51,8 +57,9 @@ void mover(ducker *pink, ducker *green, ducker *RL, dogger *dog)
     movement_dog(dog);
 }
 
-void timer(Clocker *clock, Clocker *clock2)
+void timer(Clocker *clock, Clocker *clock2, float *seconds)
 {
     clock->time = sfClock_getElapsedTime(clock->clock);
     clock2->time = sfClock_getElapsedTime(clock2->clock);
+    (*seconds) = clock->time.microseconds / 1000000.0;
 }

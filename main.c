@@ -17,18 +17,18 @@
 
 int main(int ac, char **argv)
 {
-    int hit = 10;
-    int amo = 2;
     int Game = 0;
 
     if (ac > 1 && ac < 3 && argv[1][0] == '-' && argv[1][1] == 'h')
         usage();
     else if (ac == 1) {
-        while (Game != 2) {
+        while (Game != 3 || Game != 5) {
             if (Game == 0)
-                Game = Mainscreen (680, 300, &Game);
+                Game = Mainscreen (655, 270, &Game);
             if (Game == 1)
-                window_properties(1920, 1080, hit, amo, &Game);
+                window_properties(1920, 1080, &Game);
+            if (Game == 2)
+                Game = EndScreen(1600, 950, &Game);
             else
                 break;
         }

@@ -27,8 +27,13 @@ void start_init2(int height, int width, ducker *RL, dogger *dog)
     RL_duck_init(RL, height, width);
 }
 
-void start_init3(Clocker *Clock, Clocker *Clock2)
+void start_init3(Clocker *Clock, Clocker *Clock2, sfRenderWindow *window, Stats *stats)
 {
     Clock->clock = sfClock_create();
     Clock2->clock = sfClock_create();
+    sfRenderWindow_setFramerateLimit(window, 60);
+    stats->seconds = 0;
+    stats->scores = 0;
+    stats->hit = 10;
+    stats->amo = 2;
 }
