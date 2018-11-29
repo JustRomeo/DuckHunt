@@ -26,3 +26,9 @@ void start_init2(int height, int width, ducker *RL, dogger *dog)
     dog_init(dog, height);
     RL_duck_init(RL, height, width);
 }
+
+void start_init3(Clocker *Clock, Clocker *Clock2)
+{
+    Clock->clock = sfClock_create();
+    Clock2->clock = sfClock_create();
+}

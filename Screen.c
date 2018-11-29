@@ -26,7 +26,7 @@ int Mainscreen(int width, int height, int *Game)
     size.x = 2;
     size.y = 2;
     sfSprite_setScale(sprite, size);
-    sfRenderWindow_setFramerateLimit(window, 30);
+    sfRenderWindow_setFramerateLimit(window, 40);
     while (sfRenderWindow_isOpen(window)) {
         sfSprite_setTexture(sprite, texture, sfTrue);
         sfRenderWindow_drawSprite(window, sprite, NULL);

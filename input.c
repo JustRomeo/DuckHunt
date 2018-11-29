@@ -15,7 +15,7 @@
 #include "include/proto.h"
 #include "include/my.h"
 
-int killing(sfVector2i mouse, ducker *duck, ducker *duck2, ducker *duck3, sfSound *shot,
+int killing(sfVector2i mouse, ducker *duck, ducker *duck2, ducker *duck3, sfMusic *music,
             int height, int width, int *hit)
 {
     sfVector2f duckpos = sfSprite_getPosition(duck->sprite);
@@ -26,39 +26,39 @@ int killing(sfVector2i mouse, ducker *duck, ducker *duck2, ducker *duck3, sfSoun
     if (mouse.x >= duckpos.x && mouse.x <= duckpos.x + 110 && mouse.y <= duckpos.y + 110 &&
         mouse.y >= duckpos.y) {
         pink_duck_init(duck, height, width);
-        //sfSound_play(shot); STARFOULA C'EST LE SON QUI SEGFAULT
+        sfMusic_play(music);
         (*hit)--;
         return (100);
     }
     else if (mouse.x >= duckpos2.x && mouse.x <= duckpos2.x + 110 &&
              mouse.y <= duckpos2.y + 110 && mouse.y >= duckpos2.y) {
         green_duck_init(duck2, height, width);
-        //sfSound_play(shot); STARFOULA C'EST LE SON QUI SEGFAULT
+        sfMusic_play(music);
         (*hit)--;
         return (150);
     }
     else if (mouse.x >= duckpos3.x && mouse.x <= duckpos3.x + 110 &&
              mouse.y <= duckpos3.y + 110 && mouse.y >= duckpos3.y) {
         RL_duck_init(duck3, height, width);
-        //sfSound_play(shot); STARFOULA C'EST LE SON QUI SEGFAULT
+        sfMusic_play(music);
         (*hit)--;
         return (200);
     }
     else {
         (*hit)--;
-        //sfSound_play(shot); STARFOULA C'EST LE SON QUI SEGFAULT
+        sfMusic_play(music);
         return (0);
     }
 }
 
 int input_event(sfMouseButtonEvent event, sfRenderWindow *window, sfVector2i mouse,
-                ducker *duck, ducker *duck2, ducker *duck3, sfSound *shot, int height,
+                ducker *duck, ducker *duck2, ducker *duck3, sfMusic *music, int height,
                 int width, int *hit)
 {
     int score = 0;
 
     switch (event.type) {
-    case sfEvtMouseButtonPressed : score = killing(mouse, duck, duck2, duck3, shot, height,
+    case sfEvtMouseButtonPressed : score = killing(mouse, duck, duck2, duck3, music, height,
                                                    width, hit); break;
     case sfEvtClosed : sfRenderWindow_close(window); break;
     case sfEvtKeyPressed : sfRenderWindow_close(window); break;

@@ -13,6 +13,29 @@
 #include <SFML/Graphics.h>
 #include <SFML/System.h>
 
+typedef struct horloge
+{
+    sfClock *clock;
+    sfTime time;
+} Clocker;
+
+typedef struct curseur
+{
+    sfTexture *texture;
+    sfSprite *sprite;
+    
+    sfVector2f pos;
+    sfVector2f size;
+} cursor;
+
+typedef struct fond
+{
+    sfTexture *texture;
+    sfSprite *sprite;
+
+    sfVector2f size;
+} Back;
+
 typedef struct chien
 {
     sfTexture *texture;
@@ -46,8 +69,7 @@ void move_dog(sfIntRect *dogrect);
 sfIntRect rect_dog(sfIntRect *dogrect);
 void movement_dog(dogger *dog);
 sfRenderWindow *createMyWindow(unsigned int width, unsigned int height);
-void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuffer_shot,
-                  int scores, int *Game);
+void close_window(sfRenderWindow *window, int scores, int *Game);
 int window_properties(unsigned int width, unsigned int height, int hit, int amo, int *Game);
 void mouse_co(sfMouseButtonEvent event, sfRenderWindow *window);
 void analyse_events(sfRenderWindow *window, sfEvent event);
@@ -59,14 +81,16 @@ void dog_init(dogger *dog, int height);
 void move_image_mid(ducker *duck, sfIntRect *rectangle);
 void init_clean(int height, int width, ducker *duck, ducker *duck2, ducker *duck3,
                 dogger *dog);
-void init_pos(unsigned int width, unsigned int height, dogger dog,
-              sfVector2f *size_back, sfVector2f *cursor_var, sfVector2f *cursor_size);
+void init_pos(unsigned int width, unsigned int height, Back *back, cursor *cursor);
 int input_event(sfMouseButtonEvent event, sfRenderWindow *window, sfVector2i mouse,
-                ducker *duck, ducker *duck2, ducker *duck3, sfSound *shot, int height,
+                ducker *duck, ducker *duck2, ducker *duck3, sfMusic *music, int height,
                 int width, int *hit);
 void start_init(int height, int width, ducker *pink, ducker *green);
 void start_init2(int height, int width, ducker *RL, dogger *dog);
-void drawing(sfRenderWindow *window, sfSprite *pink, sfSprite *green,
-             sfSprite *dog, sfSprite *RL);
+void start_init3(Clocker *Clock, Clocker *Clock2);
+void drawing(sfRenderWindow *window, ducker *pink, ducker *green,
+             ducker *dog, ducker *RL);
+void drawing2(sfRenderWindow *window, cursor *cursor, Back *back);
 void mover(ducker *pink, ducker *green, ducker *RL, dogger *dog);
 int Mainscreen(int width, int height, int *Game);
+void timer(Clocker *clock, Clocker *clock2);

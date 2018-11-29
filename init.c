@@ -15,13 +15,19 @@
 #include "include/proto.h"
 #include "include/my.h"
 
-void init_pos(unsigned int width, unsigned int height, dogger dog, sfVector2f *size_back,
-              sfVector2f *cursor_var, sfVector2f *cursor_size)
+void init_pos(unsigned int width, unsigned int height, Back *back, cursor *cursor)
 {
-    size_back->x = 4;
-    size_back->y = 4;
-    cursor_size->x = 0.4;
-    cursor_size->y = 0.4;
+    back->texture = sfTexture_createFromFile("ressources/sprite_back.png", NULL);
+    back->sprite = sfSprite_create();
+    back->size.x = 4;
+    back->size.y = 4;
+    sfSprite_setScale(back->sprite, back->size);
+    
+    cursor->texture = sfTexture_createFromFile("ressources/sprite_cursor.png", NULL);
+    cursor->sprite = sfSprite_create();
+    cursor->size.x = 0.4;
+    cursor->size.y = 0.4;
+    sfSprite_setScale(cursor->sprite, cursor->size);
 }
 
 void dog_init(dogger *dog, int height)
@@ -87,4 +93,3 @@ void RL_duck_init(ducker *duck, int height, int width)
     duck->speed.y = -6 + rand() %(4);
     sfSprite_setPosition(duck->sprite, duck->init);
 }
-

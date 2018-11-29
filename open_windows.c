@@ -27,11 +27,8 @@ sfRenderWindow *createMyWindow(unsigned int width, unsigned int height)
     return (window);
 }
 
-void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuffer_shot,
-                  int scores, int *Game)
+void close_window(sfRenderWindow *window, int scores, int *Game)
 {
-    sfSound_destroy(shot);
-    sfSoundBuffer_destroy(soundbuffer_shot);
     sfRenderWindow_close(window);
     my_printf("Score : %d\n", scores);
     (*Game) = 2;
@@ -40,73 +37,49 @@ void close_window(sfRenderWindow *window, sfSound *shot, sfSoundBuffer *soundbuf
 int window_properties(unsigned int width, unsigned int height, int hit, int amo, int *Game)
 {
     sfRenderWindow *window = createMyWindow(width, height);
-    sfTexture *background = sfTexture_createFromFile("ressources/sprite_back.png", NULL);
-    sfTexture *cursor = sfTexture_createFromFile("ressources/sprite_cursor.png", NULL);
-    sfSprite *s_back = sfSprite_create();
-    sfSprite *s_cursor = sfSprite_create();
     sfMouseButtonEvent event;
     sfVector2i mouse;
-    sfClock *clock = sfClock_create();
-    sfClock *clock2 = sfClock_create();
-    sfTime time;
-    sfTime moving;
     float seconds = 0;
-    sfVector2f size_back;
-    sfVector2f cursor_var;
-    sfVector2f cursor_size;
     int scores = 0;
-    sfSoundBuffer *soundbuffer_shot = sfSoundBuffer_createFromFile
-        ("ressources/sound_shot.wav");
-    sfSound *shot = sfSound_create();
+    sfMusic *music = sfMusic_createFromFile("ressources/sound_shot.wav");
+    Back back;
+    cursor cursor;
     dogger dog;
     ducker pink_duck;
     ducker green_duck;
     ducker RL_duck;
+    Clocker Clock;
+    Clocker Clock2;
 
     start_init(height, width, &pink_duck, &green_duck);
     start_init2(height, width, &RL_duck, &dog);
-    sfSound_setBuffer(shot, soundbuffer_shot);
-    init_pos(width, height, dog, &size_back, &cursor_var, &cursor_size);
-    sfSprite_setScale(s_back, size_back);
-    sfSprite_setScale(s_cursor, cursor_size);
+    start_init3(&Clock, &Clock2);
+    init_pos(width, height, &back, &cursor);
     sfRenderWindow_setFramerateLimit(window, 60);
     while (sfRenderWindow_isOpen(window)) {
         mouse = sfMouse_getPositionRenderWindow(window);
-        cursor_var.x = (float)mouse.x - 50;
-        cursor_var.y = (float)mouse.y - 55;
-        time = sfClock_getElapsedTime(clock);
-        moving = sfClock_getElapsedTime(clock2);
-        seconds = time.microseconds / 1000000.0;
+        cursor.pos.x = (float)mouse.x - 50;
+        cursor.pos.y = (float)mouse.y - 55;
+        timer(&Clock, &Clock2);
+        seconds = Clock.time.microseconds / 1000000.0;
         sfRenderWindow_clear(window, sfWhite);
-        sfSprite_setTexture(s_back, background, sfTrue);
-        sfSprite_setTexture(pink_duck.sprite, pink_duck.texture, sfTrue);
-        sfSprite_setTexture(green_duck.sprite, green_duck.texture, sfTrue);
-        sfSprite_setTexture(RL_duck.sprite, RL_duck.texture, sfTrue);
-        sfSprite_setTexture(dog.sprite, dog.texture, sfTrue);
-        sfSprite_setTexture(s_cursor, cursor, sfTrue);
-        sfRenderWindow_drawSprite(window, s_back, NULL);
-        sfSprite_setTextureRect(pink_duck.sprite, pink_duck.rect);
-        sfSprite_setTextureRect(green_duck.sprite, green_duck.rect);
-        sfSprite_setTextureRect(RL_duck.sprite, RL_duck.rect);
-        sfSprite_setTextureRect(dog.sprite, dog.rect);
-        drawing(window, pink_duck.sprite, green_duck.sprite, RL_duck.sprite, dog.sprite);
-        sfRenderWindow_drawSprite(window, s_cursor, NULL);
-        sfSprite_setPosition(s_cursor, cursor_var);
+        drawing2(window, &cursor, &back);
+        drawing(window, &pink_duck, &green_duck, &RL_duck, &dog);
         sfRenderWindow_setMouseCursorVisible(window, sfFalse);
         if (seconds > 0.15) {
             tempo_sprite(&pink_duck.rect, &green_duck.rect, &RL_duck.rect, &dog.rect,
                          &seconds);
-            sfClock_restart(clock);
+            sfClock_restart(Clock.clock);
         }
-        if (moving.microseconds > 10000) {
+        if (Clock2.time.microseconds > 10000) {
             mover(&pink_duck, &green_duck, &RL_duck, &dog);
-            sfClock_restart(clock2);
+            sfClock_restart(Clock2.clock);
             init_clean(height, width, &pink_duck, &green_duck, &RL_duck, &dog);
         }
         display_bullet(window, hit, width, height);
         while (sfRenderWindow_pollEvent(window, &event) && hit > 0) {
             scores += input_event(event, window, mouse, &pink_duck, &green_duck, &RL_duck,
-                                  shot, height, width, &hit);
+                                  music, height, width, &hit);
         }
         if (hit == 0 && amo > 1) {
             hit = 10;
@@ -116,6 +89,6 @@ int window_properties(unsigned int width, unsigned int height, int hit, int amo,
         if (hit == 0 && amo == 1)
             break;
     }
-    close_window(window, shot, soundbuffer_shot, scores, Game);
+    close_window(window, scores, Game);
     return (0);
 }
