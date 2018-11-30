@@ -76,5 +76,4 @@ void usage() {
     write(1, "The ducks appear, and the player has to shoot them down.\n", 57);
     write(1, "The player receives points upon shooting each duck.\n", 52);
     write(1, "The bullet's number is limited.\n", 35);
-    exit ("");
 }
