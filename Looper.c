@@ -23,7 +23,8 @@ sfRenderWindow *createMyWindow(unsigned int width, unsigned int height)
     video_mode.width = width;
     video_mode.height = height;
     video_mode.bitsPerPixel = 32;
-    window = sfRenderWindow_create(video_mode, "My Hunter", sfDefaultStyle, NULL);
+    window = sfRenderWindow_create(video_mode, "My Hunter",
+                                   sfDefaultStyle, NULL);
     return (window);
 }
 
@@ -70,8 +71,9 @@ int window_properties(unsigned int width, unsigned int height, int *Game)
         }
         display_bullet(window, stats.hit, width, height);
         while (sfRenderWindow_pollEvent(window, &event) && stats.hit > 0) {
-            stats.scores += input_event(event, window, stats.mouse, &pink, &green, &RL,
-                                        music, height, width, &stats.hit);
+            stats.scores += input_event(event, window, stats.mouse, &pink,
+                                        &green, &RL, music, height, width,
+                                        &stats.hit);
         }
         if (stats.hit == 0 && stats.amo > 1) {
             stats.hit = 10;

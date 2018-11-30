@@ -34,7 +34,8 @@ void drawing(sfRenderWindow *window, ducker *pink, ducker *green,
     sfSprite_setTextureRect(dog->sprite, dog->rect);
 }
 
-void drawing2(sfRenderWindow *window, cursor *cursor, Back *back, sfVector2i *mouse)
+void drawing2(sfRenderWindow *window, cursor *cursor, Back *back,
+              sfVector2i *mouse)
 {
     sfSprite_setTexture(back->sprite, back->texture, sfTrue);
     sfRenderWindow_drawSprite(window, back->sprite, NULL);
