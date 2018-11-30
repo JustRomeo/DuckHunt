@@ -15,6 +15,17 @@
 #include "include/proto.h"
 #include "include/my.h"
 
+void Gamemode(int *Game)
+{
+    while ((*Game) < 3) {
+        if ((*Game) == 0)
+            (*Game) = Mainscreen (655, 270, Game);
+        if ((*Game) == 1)
+            window_properties(1920, 1080, Game);
+        if ((*Game) == 2)
+            (*Game) = EndScreen(1600, 950, Game);
+    }
+}
 int main(int ac, char **argv)
 {
     int Game = 0;
@@ -22,18 +33,9 @@ int main(int ac, char **argv)
     if (ac > 1 && ac < 3 && argv[1][0] == '-' && argv[1][1] == 'h')
         usage();
     else if (ac == 1) {
-        while (Game != 3 || Game != 5) {
-            if (Game == 0)
-                Game = Mainscreen (655, 270, &Game);
-            if (Game == 1)
-                window_properties(1920, 1080, &Game);
-            if (Game == 2)
-                Game = EndScreen(1600, 950, &Game);
-            else
-                break;
-        }
+        Gamemode(&Game);
     }
     else
         write(1, "Unknow arguments :(\n", 20);
-    return(0);
+    return (0);
 }

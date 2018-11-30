@@ -32,7 +32,8 @@
 
 void disp(sfRenderWindow *window, float x, float y)
 {
-    sfTexture *tbullet = sfTexture_createFromFile("ressources/sprite_bullet.png", NULL);
+    sfTexture *tbullet = sfTexture_createFromFile
+        ("ressources/sprite_bullet.png", NULL);
     sfSprite *sbullet = sfSprite_create();
     sfVector2f where;
     sfVector2f size;
@@ -47,7 +48,7 @@ void disp(sfRenderWindow *window, float x, float y)
     sfSprite_setTexture(sbullet, tbullet, sfTrue);
     sfSprite_setPosition(sbullet, where);
     sfRenderWindow_drawSprite(window, sbullet, NULL);
-    }
+}
  
 void display_bullet(sfRenderWindow *window, int bullet, int width, int height)
 {
