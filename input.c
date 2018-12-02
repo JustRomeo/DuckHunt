@@ -70,7 +70,8 @@ int input_event(sfMouseButtonEvent event, sfRenderWindow *window,
     return (score);
 }
 
-void usage() {
+void usage()
+{
     write(1, "USAGE\n./my_hunter map\n\nDESCRIPTION\n", 35);
     write(1, "This game is an point and click.\n", 33);
     write(1, "The ducks appear, and the player has to shoot them down.\n", 57);

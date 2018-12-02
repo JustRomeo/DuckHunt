@@ -43,14 +43,12 @@ void move_image_mid(ducker *duck, sfIntRect *rectangle)
         else
             rectangle->left = 0;
     }
-
     else if (duck->rect.left < 500) {
         if (rectangle->left < 498)
             rectangle->left += 83;
         else
             rectangle->left = 250;
     }
-
     else {
         if (rectangle->left < 697)
             rectangle->left += 83;

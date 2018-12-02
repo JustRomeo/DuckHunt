@@ -43,7 +43,6 @@ void disp(sfRenderWindow *window, float x, float y)
     where.y = y;
     size.x = 2;
     size.y = 2;
-    
     sfSprite_setScale(sbullet, size);
     sfSprite_setTexture(sbullet, tbullet, sfTrue);
     sfSprite_setPosition(sbullet, where);
@@ -52,7 +51,6 @@ void disp(sfRenderWindow *window, float x, float y)
  
 void display_bullet(sfRenderWindow *window, int bullet, int width, int height)
 {
-    
     switch (bullet) {
     case 10: disp(window, 270, 1);
     case 9: disp(window, 240, 1);

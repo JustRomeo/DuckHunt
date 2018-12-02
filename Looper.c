@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** opening_windows.c
+** Looper.c
 ** File description:
 ** header
 */

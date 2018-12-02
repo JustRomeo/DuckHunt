@@ -24,7 +24,6 @@ void init_pos(unsigned int width, unsigned int height, Back *back,
     back->size.x = 4;
     back->size.y = 4;
     sfSprite_setScale(back->sprite, back->size);
-    
     cursor->texture = sfTexture_createFromFile
         ("ressources/sprite_cursor.png", NULL);
     cursor->sprite = sfSprite_create();
