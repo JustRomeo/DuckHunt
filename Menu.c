@@ -15,24 +15,20 @@
 #include "include/proto.h"
 #include "include/my.h"
 
-int EVENT(sfRenderWindow *window, sfMouseButtonEvent event)
-{
+int EVENT(sfRenderWindow *window, sfMouseButtonEvent event) {
     if (event.type == sfEvtMouseButtonPressed) {
         sfRenderWindow_close(window);
         return (1);
-    }
-    else if (event.type == sfEvtClosed){
+    } else if (event.type == sfEvtClosed){
         sfRenderWindow_close(window);
         return (3);
     }
     return (0);
 }
 
-int Mainscreen(int width, int height, int *Game)
-{
+int Mainscreen(int width, int height, int *Game) {
     sfRenderWindow *window = createMyWindow(width, height);
-    sfTexture *texture = sfTexture_createFromFile
-        ("ressources/mainscreen.png", NULL);
+    sfTexture *texture = sfTexture_createFromFile("ressources/mainscreen.png", NULL);
     sfSprite *sprite = sfSprite_create();
     sfMouseButtonEvent event;
     sfVector2f size;
@@ -44,18 +40,15 @@ int Mainscreen(int width, int height, int *Game)
     while (sfRenderWindow_isOpen(window)) {
         sfSprite_setTexture(sprite, texture, sfTrue);
         sfRenderWindow_drawSprite(window, sprite, NULL);
-        while (sfRenderWindow_pollEvent(window, &event) &&
-               EVENT(window, event) != 0)
+        while (sfRenderWindow_pollEvent(window, &event) && EVENT(window, event) != 0)
             return (EVENT(window, event));
         sfRenderWindow_display(window);
     }
 }
 
-int EndScreen(int width, int height, int *Game)
-{
+int EndScreen(int width, int height, int *Game) {
     sfRenderWindow *window = createMyWindow(width, height);
-    sfTexture *texture = sfTexture_createFromFile
-        ("ressources/EndScreen.jpg", NULL);
+    sfTexture *texture = sfTexture_createFromFile("ressources/EndScreen.jpg", NULL);
     sfSprite *sprite = sfSprite_create();
     sfMouseButtonEvent event;
     sfVector2f size;
@@ -67,8 +60,7 @@ int EndScreen(int width, int height, int *Game)
     while (sfRenderWindow_isOpen(window)) {
         sfSprite_setTexture(sprite, texture, sfTrue);
         sfRenderWindow_drawSprite(window, sprite, NULL);
-        while (sfRenderWindow_pollEvent(window, &event) &&
-               EVENT(window, event) != 0)
+        while (sfRenderWindow_pollEvent(window, &event) && EVENT(window, event) != 0)
             return (2 + EVENT(window, event));
         sfRenderWindow_display(window);
     }

@@ -15,9 +15,7 @@
 #include "include/proto.h"
 #include "include/my.h"
 
-void init_clean(int height, int width, ducker *duck, ducker *duck2,
-                ducker *duck3, dogger *dog)
-{
+void init_clean(int height, int width, ducker *duck, ducker *duck2, ducker *duck3, dogger *dog) {
     sfVector2f duckpos = sfSprite_getPosition(duck->sprite);
     sfVector2f duckpos2 = sfSprite_getPosition(duck2->sprite);
     sfVector2f duckpos3 = sfSprite_getPosition(duck3->sprite);

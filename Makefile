@@ -2,23 +2,25 @@
 ## EPITECH PROJECT, 2018
 ## Makefile
 ## File description:
-## Le Makefile du Day 10, accessoirement la Task 1
+## Makefile Duck Hunt
+## Autor
+## Roméo TALOVICI
 ##
 
-SRC =	main.c	\
-		Looper.c	\
-		Entities.c	\
-		Init.c	\
-		input.c	\
-		dog.c	\
+SRC =	main.c				\
+		Looper.c			\
+		Entities.c			\
+		Init.c				\
+		input.c				\
+		dog.c				\
 		green_mid_duck.c	\
-		pink_mid_duck.c	\
-		RL_duck.c	\
-		animation.c	\
-		clean.c	\
-		bullet.c	\
-		IGstats.c	\
-		Menu.c	\
+		pink_mid_duck.c		\
+		RL_duck.c			\
+		animation.c			\
+		clean.c				\
+		bullet.c			\
+		IGstats.c			\
+		Menu.c				\
 
 OBJ =	$(SRC:.c=.o)
 
@@ -42,7 +44,7 @@ exe:		$(NAME)
 			clear
 			./$(NAME)
 
-clean: 
+clean:
 	rm -f $(OBJ)
 
 fclean:	clean

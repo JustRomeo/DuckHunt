@@ -14,45 +14,26 @@
 #include "include/proto.h"
 #include "include/my.h"
 
-sfIntRect rect_MD(sfIntRect *rectangle)
-{
+sfIntRect rect_MD(sfIntRect *rectangle) {
     rectangle->top = 0;
     rectangle->left = 0;
     rectangle->width = 110;
     rectangle->height = 110;
 }
 
-void move_image_MD(sfIntRect *rectangle)
-{
-    if (rectangle->left < 220)
-        rectangle->left += 110;
-    else
-        rectangle->left = 0;
+void move_image_MD(sfIntRect *rectangle) {
+    rectangle->left = rectangle->left < 220 ? rectangle->left + 110 : 0;
 }
 
-void move(ducker *duck)
-{
+void move(ducker *duck) {
     sfSprite_move(duck->sprite, duck->speed);
 }
 
-void move_image_mid(ducker *duck, sfIntRect *rectangle)
-{
-    if (duck->rect.left < 250) {
-        if (rectangle->left < 249)
-            rectangle->left += 83;
-        else
-            rectangle->left = 0;
-    }
-    else if (duck->rect.left < 500) {
-        if (rectangle->left < 498)
-            rectangle->left += 83;
-        else
-            rectangle->left = 250;
-    }
-    else {
-        if (rectangle->left < 697)
-            rectangle->left += 83;
-        else
-            rectangle->left = 750;
-    }
+void move_image_mid(ducker *duck, sfIntRect *rectangle) {
+    if (duck->rect.left < 250)
+        rectangle->left = rectangle->left < 249 ? rectangle->left + 83 : 0;
+    else if (duck->rect.left < 500)
+        rectangle->left = rectangle->left < 498 ? rectangle->left + 83 : 250;
+    else
+        rectangle->left = rectangle->left < 697 ? rectangle->left + 83 : 750;
 }

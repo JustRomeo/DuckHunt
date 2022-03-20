@@ -15,9 +15,7 @@
 #include "include/proto.h"
 #include "include/my.h"
 
-void drawing(sfRenderWindow *window, ducker *pink, ducker *green,
-             ducker *dog, ducker *RL)
-{
+void drawing(sfRenderWindow *window, ducker *pink, ducker *green, ducker *dog, ducker *RL) {
     sfRenderWindow_drawSprite(window, pink->sprite, NULL);
     sfRenderWindow_drawSprite(window, green->sprite, NULL);
     sfRenderWindow_drawSprite(window, RL->sprite, NULL);
@@ -32,9 +30,7 @@ void drawing(sfRenderWindow *window, ducker *pink, ducker *green,
     sfSprite_setTextureRect(dog->sprite, dog->rect);
 }
 
-void drawing2(sfRenderWindow *window, cursor *cursor, Back *back,
-              sfVector2i *mouse)
-{
+void drawing2(sfRenderWindow *window, cursor *cursor, Back *back, sfVector2i *mouse) {
     sfSprite_setTexture(back->sprite, back->texture, sfTrue);
     sfRenderWindow_drawSprite(window, back->sprite, NULL);
     (*mouse) = sfMouse_getPositionRenderWindow(window);
@@ -45,16 +41,14 @@ void drawing2(sfRenderWindow *window, cursor *cursor, Back *back,
     sfSprite_setPosition(cursor->sprite, cursor->pos);
 }
 
-void mover(ducker *pink, ducker *green, ducker *RL, dogger *dog)
-{
+void mover(ducker *pink, ducker *green, ducker *RL, dogger *dog) {
     move(pink);
     move(green);
     move(RL);
     movement_dog(dog);
 }
 
-void timer(Clocker *clock, Clocker *clock2, float *seconds)
-{
+void timer(Clocker *clock, Clocker *clock2, float *seconds) {
     clock->time = sfClock_getElapsedTime(clock->clock);
     clock2->time = sfClock_getElapsedTime(clock2->clock);
     (*seconds) = clock->time.microseconds / 1000000.0;

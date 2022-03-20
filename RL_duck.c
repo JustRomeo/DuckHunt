@@ -15,22 +15,21 @@
 #include "include/proto.h"
 #include "include/my.h"
 
-sfIntRect rect_RL(sfIntRect *rectangle_RL)
-{
+sfIntRect rect_RL(sfIntRect *rectangle_RL) {
     rectangle_RL->top = 170;
     rectangle_RL->left = 100;
     rectangle_RL->width = 100;
     rectangle_RL->height = 120;
 }
 
-void move_image_RL(sfIntRect *rectangle_RL)
-{
-    if (rectangle_RL->left < 400)
-        rectangle_RL->left += 330;
-    else
-        rectangle_RL->left = 100;
+void move_image_RL(sfIntRect *rectangle_RL) {
+    rectangle_RL->left = rectangle_RL->left < 400 ? rectangle_RL->left + 330 : 100;
+    // if (rectangle_RL->left < 400)
+    //     rectangle_RL->left += 330;
+    // else
+    //     rectangle_RL->left = 100;
 }
-void move_RL(ducker *duck)
-{
+
+void move_RL(ducker *duck) {
     sfSprite_move(duck->sprite, duck->speed);
 }

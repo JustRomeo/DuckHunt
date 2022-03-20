@@ -13,8 +13,7 @@
 #include <SFML/Graphics.h>
 #include <SFML/System.h>
 
-typedef struct statistiques
-{
+typedef struct statistiques {
     sfVector2i mouse;
     float seconds;
     int scores;
@@ -22,31 +21,27 @@ typedef struct statistiques
     int amo;
 } Stats;
 
-typedef struct horloge
-{
+typedef struct horloge {
     sfClock *clock;
     sfTime time;
 } Clocker;
 
-typedef struct curseur
-{
+typedef struct curseur {
     sfTexture *texture;
     sfSprite *sprite;
-    
+
     sfVector2f pos;
     sfVector2f size;
 } cursor;
 
-typedef struct fond
-{
+typedef struct fond {
     sfTexture *texture;
     sfSprite *sprite;
 
     sfVector2f size;
 } Back;
 
-typedef struct chien
-{
+typedef struct chien {
     sfTexture *texture;
     sfSprite *sprite;
     sfIntRect rect;
@@ -55,8 +50,7 @@ typedef struct chien
     sfVector2f speed;
 } dogger;
 
-typedef struct canard
-{
+typedef struct canard {
     sfTexture *texture;
     sfSprite *sprite;
     sfIntRect rect;

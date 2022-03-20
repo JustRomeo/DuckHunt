@@ -1,0 +1,8 @@
+# Binary
+my_hunter
+
+# Library
+*.a
+
+# Compilation File(s)
+*.o

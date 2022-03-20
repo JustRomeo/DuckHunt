@@ -12,11 +12,11 @@
 #include <SFML/Audio.h>
 #include <SFML/Graphics.h>
 #include <SFML/System.h>
-#include "include/proto.h"
-#include "include/my.h"
 
-void Gamemode(int *Game)
-{
+#include "include/my.h"
+#include "include/proto.h"
+
+void Gamemode(int *Game) {
     while ((*Game) < 3) {
         if ((*Game) == 0)
             (*Game) = Mainscreen (655, 270, Game);
@@ -26,8 +26,8 @@ void Gamemode(int *Game)
             (*Game) = EndScreen(1600, 950, Game);
     }
 }
-int main(int ac, char **argv)
-{
+
+int main(int ac, char **argv) {
     int Game = 0;
 
     if (ac > 1 && ac < 3 && argv[1][0] == '-' && argv[1][1] == 'h')
